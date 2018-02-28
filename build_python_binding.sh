@@ -11,3 +11,5 @@ g++ -shared -fpic wrapper/plate_detector_wrap.cxx \
 echo "copy libeasypr and libthirdparty..."
 cp build/libeasypr.so wrapper
 cp build/thirdparty/libthirdparty.so wrapper
+echo "link model..."
+ln -s ../model/ wrapper
