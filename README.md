@@ -19,4 +19,5 @@
 ## Customize
 1. Modify `wrapper/wrapper.h` as what you like.
 2. Run `build_shared_objects.sh` to generate `libeasypr.so` and `libthirdparty.so`
+3. Clone repo [renatoGarcia/opencv-swig](https://github.com/renatoGarcia/opencv-swig) alongside this repo
 3. Run `build_python_binding.sh` to generate python binding `plate_detector.py` and `_plate_detector.so`
