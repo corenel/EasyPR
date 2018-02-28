@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.1.0)
 project(thirdparty)
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
 
 # OpenVC3 required
 find_package(OpenCV 3.1.0 REQUIRED)
@@ -17,4 +18,4 @@ set(SOURCE_FILES
         )
 
 # pack objects to static library
-add_library(thirdparty STATIC ${SOURCE_FILES})
+add_library(thirdparty SHARED ${SOURCE_FILES})

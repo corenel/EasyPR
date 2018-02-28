@@ -16,7 +16,6 @@ find_package(OpenCV 3.2.0 REQUIRED)
 include_directories(.)
 include_directories(include)
 include_directories(${OpenCV_INCLUDE_DIRS})
-#include_directories(/usr/local/Cellar/python3/3.6.4_2/Frameworks/Python.framework/Versions/3.6/include/python3.6m/)
 
 # sub directories
 add_subdirectory(thirdparty)
@@ -46,21 +45,23 @@ set(SOURCE_FILES
         )
 
 # pack objects to static library
-add_library(easypr STATIC ${SOURCE_FILES})
+add_library(easypr SHARED ${SOURCE_FILES})
 
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    set(EXECUTABLE_NAME "wrapper")
+    set(EXECUTABLE_NAME "plate_detector")
+    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    set(EXECUTABLE_NAME "wrapper")
+    set(EXECUTABLE_NAME "plate_detector")
+    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
 endif ()
 
 # set to be releas mode
 # set(CMAKE_BUILD_TYPE Release)
 
 # test cases
-  # add_executable(${EXECUTABLE_NAME} test/main.cpp)
-#add_executable(${EXECUTABLE_NAME} test/wrapper.cpp)
-add_executable(${EXECUTABLE_NAME} wrapper/plate_detector_wrap.cxx)
+#add_executable(${EXECUTABLE_NAME} test/main.cpp)
+add_executable(${EXECUTABLE_NAME} wrapper/wrapper.cpp)
+#add_library(${EXECUTABLE_NAME} SHARED wrapper/plate_detector_wrap.cxx)
 # link opencv libs
 target_link_libraries(${EXECUTABLE_NAME} easypr thirdparty ${OpenCV_LIBS})
 # MESSAGE(${CMAKE_BINARY_DIR}/../)
