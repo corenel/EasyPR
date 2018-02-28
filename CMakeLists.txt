@@ -45,12 +45,12 @@ set(SOURCE_FILES
         )
 
 # pack objects to static library
-add_library(easypr SHARED ${SOURCE_FILES})
+add_library(easypr STATIC ${SOURCE_FILES})
 
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    set(EXECUTABLE_NAME "demo")
+    set(EXECUTABLE_NAME "wrapper")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    set(EXECUTABLE_NAME "demo")
+    set(EXECUTABLE_NAME "wrapper")
 endif ()
 
 # set to be releas mode
@@ -58,7 +58,7 @@ endif ()
 
 # test cases
   # add_executable(${EXECUTABLE_NAME} test/main.cpp)
-add_executable("wrapper" test/wrapper.cpp)
+add_executable(${EXECUTABLE_NAME} test/wrapper.cpp)
 # link opencv libs
 target_link_libraries(${EXECUTABLE_NAME} easypr thirdparty ${OpenCV_LIBS})
 # MESSAGE(${CMAKE_BINARY_DIR}/../)
