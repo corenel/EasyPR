@@ -16,6 +16,7 @@ find_package(OpenCV 3.2.0 REQUIRED)
 include_directories(.)
 include_directories(include)
 include_directories(${OpenCV_INCLUDE_DIRS})
+#include_directories(/usr/local/Cellar/python3/3.6.4_2/Frameworks/Python.framework/Versions/3.6/include/python3.6m/)
 
 # sub directories
 add_subdirectory(thirdparty)
@@ -58,7 +59,8 @@ endif ()
 
 # test cases
   # add_executable(${EXECUTABLE_NAME} test/main.cpp)
-add_executable(${EXECUTABLE_NAME} test/wrapper.cpp)
+#add_executable(${EXECUTABLE_NAME} test/wrapper.cpp)
+add_executable(${EXECUTABLE_NAME} wrapper/plate_detector_wrap.cxx)
 # link opencv libs
 target_link_libraries(${EXECUTABLE_NAME} easypr thirdparty ${OpenCV_LIBS})
 # MESSAGE(${CMAKE_BINARY_DIR}/../)
