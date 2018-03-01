@@ -149,6 +149,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-wrapper/*.cxx
-wrapper/*.so
-wrapper/*.py
+wrapper/plate_detector_wrap.cxx
+wrapper/plate_detector.py
