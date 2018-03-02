@@ -151,3 +151,4 @@ venv.bak/
 
 wrapper/plate_detector_wrap.cxx
 wrapper/plate_detector.py
+plate_detector
