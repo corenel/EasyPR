@@ -9,13 +9,13 @@
 std::string Recognize(const cv::Mat &src) {
     easypr::CPlateRecognize pr;
     pr.setResultShow(false);
-    pr.setDetectType(easypr::PR_DETECT_COLOR | easypr::PR_DETECT_SOBEL | easypr::PR_DETECT_CMSER);
+    pr.setDetectType(easypr::PR_DETECT_COLOR | easypr::PR_DETECT_SOBEL);
     pr.setLifemode(true);
     pr.setMaxPlates(1);
 
     vector<easypr::CPlate> plate_vec;
     int result = pr.plateRecognize(src, plate_vec);
-    if (result == 0) {
+    if (result == 0 && !plate_vec.empty()) {
         return plate_vec[0].getPlateStr();
     } else {
         return "";
