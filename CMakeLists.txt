@@ -4,6 +4,7 @@ project(easypr)
 # c++11 required
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_definitions(-std=c++11 -Wall -pg -fPIC)
 
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
     set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "/usr/local/opt/opencv-3.2.0")
@@ -47,18 +48,11 @@ set(SOURCE_FILES
 # pack objects to static library
 add_library(easypr SHARED ${SOURCE_FILES})
 
-if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    set(EXECUTABLE_NAME "plate_detector")
-    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
-elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    set(EXECUTABLE_NAME "plate_detector")
-    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
-endif ()
-
 # set to be releas mode
 # set(CMAKE_BUILD_TYPE Release)
 
 # test cases
+set(EXECUTABLE_NAME "plate_detector")
 #add_executable(${EXECUTABLE_NAME} test/main.cpp)
 add_executable(${EXECUTABLE_NAME} wrapper/wrapper.cpp)
 #add_library(${EXECUTABLE_NAME} SHARED wrapper/plate_detector_wrap.cxx)

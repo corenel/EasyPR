@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1.0)
 project(thirdparty)
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
+add_definitions(-std=c++11 -Wall -pg -fPIC)
 
 # OpenVC3 required
 find_package(OpenCV 3.1.0 REQUIRED)
