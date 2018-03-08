@@ -5,6 +5,14 @@ project(easypr)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
     set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "/usr/local/opt/opencv-3.2.0")
 endif ()
@@ -49,10 +57,10 @@ add_library(easypr SHARED ${SOURCE_FILES})
 
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
     set(EXECUTABLE_NAME "plate_detector")
-    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
+      # set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
     set(EXECUTABLE_NAME "plate_detector")
-    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
+      # set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fPIC")
 endif ()
 
 # set to be releas mode
