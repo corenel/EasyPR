@@ -58,8 +58,8 @@ add_library(easypr SHARED ${SOURCE_FILES})
 # test cases
 set(EXECUTABLE_NAME "plate_detector")
 #add_executable(${EXECUTABLE_NAME} test/main.cpp)
-add_executable(${EXECUTABLE_NAME} wrapper/wrapper.cpp)
-#add_library(${EXECUTABLE_NAME} SHARED wrapper/plate_detector_wrap.cxx)
+add_executable(${EXECUTABLE_NAME} python/wrapper.cpp)
+#add_library(${EXECUTABLE_NAME} SHARED python/plate_detector_wrap.cxx)
 # link opencv libs
 target_link_libraries(${EXECUTABLE_NAME} easypr thirdparty ${OpenCV_LIBS})
 # MESSAGE(${CMAKE_BINARY_DIR}/../)
