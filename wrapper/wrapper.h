@@ -6,17 +6,36 @@
 
 #include "easypr.h"
 
-std::string Recognize(const cv::Mat &src) {
-    easypr::CPlateRecognize pr;
-    pr.setResultShow(false);
-    pr.setDetectType(easypr::PR_DETECT_COLOR | easypr::PR_DETECT_SOBEL);
-    pr.setLifemode(true);
-    pr.setMaxPlates(1);
 
-    vector<easypr::CPlate> plate_vec;
-    int result = pr.plateRecognize(src, plate_vec);
-    if (result == 0 && !plate_vec.empty()) {
-        return plate_vec[0].getPlateStr();
+class PlateDetector {
+  public:
+    PlateDetector();
+    ~PlateDetector();
+    std::string Recognize(const cv::Mat &src);
+
+  private:
+    easypr::CPlateRecognize * pr_;
+    vector<easypr::CPlate> plate_vec_;
+
+};
+
+PlateDetector::PlateDetector() {
+    pr_ = new easypr::CPlateRecognize;
+    pr_->setResultShow(false);
+    pr_->setDetectType(easypr::PR_DETECT_COLOR | easypr::PR_DETECT_SOBEL);
+    pr_->setLifemode(true);
+    pr_->setMaxPlates(1);
+}
+
+PlateDetector::~PlateDetector() {
+  delete pr_;
+}
+
+std::string PlateDetector::Recognize(const cv::Mat &src) {
+    plate_vec_.clear();
+    int result = pr_->plateRecognize(src, plate_vec_);
+    if (result == 0 && !plate_vec_.empty()) {
+        return plate_vec_[0].getPlateStr();
     } else {
         return "";
     }
