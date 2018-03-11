@@ -54,6 +54,9 @@ set(SOURCE_FILES
 
 # pack objects to static library
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".so")
+endif ()
 target_link_libraries(${PROJECT_NAME}
     stdc++
     ${OpenCV_LIBS}
@@ -62,14 +65,10 @@ target_link_libraries(${PROJECT_NAME}
 
 # test cases
 set(EXECUTABLE_NAME "plate_detector")
-#add_executable(${EXECUTABLE_NAME} test/main.cpp)
 add_executable(${EXECUTABLE_NAME} python/wrapper.cpp)
-#add_library(${EXECUTABLE_NAME} SHARED python/plate_detector_wrap.cxx)
-# link opencv libs
 target_link_libraries(${EXECUTABLE_NAME}
     ${PROJECT_NAME}
     )
-# MESSAGE(${CMAKE_BINARY_DIR}/../)
 # set_target_properties(${PROJECT_NAME}_test
 #     PROPERTIES
 #     RUNTIME_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/../")

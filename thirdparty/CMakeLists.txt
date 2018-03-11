@@ -33,6 +33,9 @@ set(SOURCE_FILES
 
 # pack objects to static library
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".so")
+endif ()
 target_link_libraries(${PROJECT_NAME}
     stdc++
     ${OpenCV_LIBS}
