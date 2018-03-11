@@ -22,7 +22,8 @@ class PlateDetector {
 PlateDetector::PlateDetector() {
     pr_ = new easypr::CPlateRecognize;
     pr_->setResultShow(false);
-    pr_->setDetectType(easypr::PR_DETECT_COLOR | easypr::PR_DETECT_SOBEL);
+    // pr_->setDetectType(easypr::PR_DETECT_COLOR | easypr::PR_DETECT_SOBEL);
+    pr_->setDetectType(easypr::PR_DETECT_CMSER);
     pr_->setLifemode(true);
     pr_->setMaxPlates(1);
 }
