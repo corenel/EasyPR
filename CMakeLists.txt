@@ -10,7 +10,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -fPIC")
-set(CMAKE_CXX_FLAGS_DEBUG "-pg")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
@@ -53,7 +53,12 @@ set(SOURCE_FILES
         )
 
 # pack objects to static library
-add_library(easypr SHARED ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME}
+    stdc++
+    ${OpenCV_LIBS}
+    thirdparty
+    )
 
 # test cases
 set(EXECUTABLE_NAME "plate_detector")
@@ -61,6 +66,10 @@ set(EXECUTABLE_NAME "plate_detector")
 add_executable(${EXECUTABLE_NAME} python/wrapper.cpp)
 #add_library(${EXECUTABLE_NAME} SHARED python/plate_detector_wrap.cxx)
 # link opencv libs
-target_link_libraries(${EXECUTABLE_NAME} easypr thirdparty ${OpenCV_LIBS})
+target_link_libraries(${EXECUTABLE_NAME}
+    ${PROJECT_NAME}
+    )
 # MESSAGE(${CMAKE_BINARY_DIR}/../)
-SET_TARGET_PROPERTIES(${EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/../")
+# set_target_properties(${PROJECT_NAME}_test
+#     PROPERTIES
+#     RUNTIME_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/../")
