@@ -67,6 +67,9 @@ target_link_libraries(${PROJECT_NAME}
 set(EXECUTABLE_NAME "plate_detector")
 add_executable(${EXECUTABLE_NAME} python/wrapper.cpp)
 target_link_libraries(${EXECUTABLE_NAME}
+    stdc++
+    ${OpenCV_LIBS}
+    thirdparty
     ${PROJECT_NAME}
     )
 # set_target_properties(${PROJECT_NAME}_test
