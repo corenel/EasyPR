@@ -31,7 +31,9 @@ PlateDetector::PlateDetector() {
 PlateDetector::~PlateDetector() { delete pr_; }
 
 std::string PlateDetector::Recognize(const cv::Mat &src) {
-  plate_vec_.clear();
+  if (plate_vec_.size() > 0) {
+    plate_vec_.clear();
+  }
   int result = pr_->plateRecognize(src, plate_vec_);
   if (result == 0 && !plate_vec_.empty()) {
     return plate_vec_[0].getPlateStr();
@@ -73,4 +75,5 @@ std::string PlateDetector::RecognizeAll(const cv::Mat &src) {
       return license;
     }
   }
+  return "";
 }
