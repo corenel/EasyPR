@@ -61,6 +61,10 @@ void PlateDetector::SetDetectType(const int &type) {
       pr_->setDetectType(easypr::PR_DETECT_COLOR | easypr::PR_DETECT_SOBEL |
                          easypr::PR_DETECT_CMSER);
       break;
+    case 3:
+      // std::cout << "use COLOR & CMSER for plate detection" << std::endl;
+      pr_->setDetectType(easypr::PR_DETECT_COLOR | easypr::PR_DETECT_CMSER);
+      break;
     default:
       std::cout << "invalid type for plate detection" << std::endl;
       break;
@@ -68,7 +72,7 @@ void PlateDetector::SetDetectType(const int &type) {
 }
 
 std::string PlateDetector::RecognizeAll(const cv::Mat &src) {
-  for (auto i = 0; i < 3; ++i) {
+  for (auto i = 0; i < 4; ++i) {
     SetDetectType(i);
     std::string license = Recognize(src);
     if (license != "") {
